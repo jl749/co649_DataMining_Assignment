@@ -30,9 +30,14 @@ public class PreProcessing {
         	String[] tmp=(line.replaceAll(" ", "")).split(","); //0~14
         	
         	//remove 10,11 Capital-Gain, Capital-Loss
-        	String[] values=new String[13];
-        	for(int i=0;i<13;i++) 
-        		values[i]=tmp[i];
+        	int index=0;
+        	String[] values=new String[12];
+        	for(int i=0;i<15;i++) {
+        		if(i==10 || i==11 || i==2) {
+        			continue;
+        		}
+        		values[index++]=tmp[i];
+        	}
         	//System.out.println(Arrays.toString(values).replaceAll("(\\[|\\])",""));
         	
             lines.add(values);
@@ -41,12 +46,23 @@ public class PreProcessing {
     }
 	
 	public void writeData() throws IOException {
-		FileWriter fstream = new FileWriter("newAdult.test");
+		FileWriter fstream = new FileWriter("newAdult.data");
 		for(int i=0;i<data.length;i++) 
 			fstream.write(Arrays.deepToString(data[i]).replaceAll("(\\[|\\])","")+"\n");
 		fstream.close();
 	}
 	
+	public void convertNumeric(int[] boundaries,int col) { //0 2 4 10
+		for(int i=0;i<data.length;i++) 
+			for(int j=0;j<boundaries.length;j++) 
+				if(Integer.parseInt(data[i][col])<=boundaries[j]) { 
+					if(j==0)
+						data[i][col]="~"+boundaries[j];
+					else
+						data[i][col]=boundaries[j-1]+"~"+boundaries[j];
+					break;
+				}
+	}
 	/**
 	 * noise in age, fnlwgt columns -> median of attribute
 	 * noise in the other columns -> mode of attribute
