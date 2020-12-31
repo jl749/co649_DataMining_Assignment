@@ -10,7 +10,7 @@ public class Main {
 			pre.removeNoise();
 			pre.writeData();
 			
-			//pre.runGA(4,0);
+			//pre.runGA(3,0);
 			/**
 			 * According to GA result [20, 63, 80, 88] 
 			 * 88 is close to max 90, replace 88->90

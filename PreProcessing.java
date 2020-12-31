@@ -192,19 +192,19 @@ public class PreProcessing {
 			boolean flag=false;
 			for(int j=0;j<individual.length;j++) { //find matching range
 				if(Integer.parseInt(data[i][col])<individual[j]) {
-					if(data[i][12].equals("<=50K")) {
+					if(data[i][11].equals("<=50K")) {
 						count[j][0]++;	flag=true;
 						break;
-					}else if(data[i][12].equals(">50K")) {
+					}else if(data[i][11].equals(">50K")) {
 						count[j][1]++;	flag=true;
 						break;
 					}
 				}
 			}
 			if(!flag) 
-				if(data[i][12].equals("<=50K")) 
+				if(data[i][11].equals("<=50K")) 
 					count[individual.length][0]++;
-				else if(data[i][12].equals(">50K")) 
+				else if(data[i][11].equals(">50K")) 
 					count[individual.length][1]++;
 		}
 		return count;
